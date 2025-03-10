@@ -29,7 +29,13 @@ class Hangman {
     endGame();
   }
 
-  void endGame() {}
+  void endGame() {
+      if (!hiddenWord.contains("_")) {
+      print("Congratulations! You guessed the word: $targetWord");
+    } else {
+      print("Game Over! The correct word was: $targetWord");
+    }
+  }
   String getUserInput() {
     stdout.write("Enter a letter: ");
     String? input = stdin.readLineSync() ?? 'a'.toLowerCase();
@@ -43,6 +49,26 @@ class Hangman {
     return input;
   }
 
-  void displayGameState() {}
-  void checkGuess(String guess) {}
+  void displayGameState() {
+    print("Word: ${hiddenWord.join(" ")}");
+    print("Attempts left: $attempts");
+    print("Guessed letters: ${guessedLetters.join(", ")}");
+  }
+  void checkGuess(String guess) {
+        guessedLetters.add(guess);
+    if (targetWord.contains(guess)) {
+      for (int i = 0; i < targetWord.length; i++) {
+        if (targetWord[i] == guess) {
+          hiddenWord[i] = guess;
+        }
+      }
+    } else {
+      attempts--;
+      print("Wrong guess! You lost one attempt.");
+    }
+  }
+}
+void main() {
+  Hangman game = Hangman();
+  game.startGame();
 }
