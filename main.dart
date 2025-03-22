@@ -19,7 +19,7 @@ class Hangman {
   }
 
   void startGame() {
-    print('Welcome To Hangman Game !');
+    print('Welcome To Hangman Game!');
     print('Try to guess the Word ');
     while (attempts > 0 && hiddenWord.contains('_')) {
       displayGameState();
